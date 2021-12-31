@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test
+import kotlin.math.pow
 import kotlin.test.assertEquals
 
 class ComposeFunctionTest {
@@ -25,5 +26,18 @@ class ComposeFunctionTest {
         }
         val fog = f.compose(g)
         assertEquals(fog("20"), 30.0)
+    }
+
+    @Test
+    fun `compose generic functions`() {
+        val f = { x: Double ->
+            x.pow(2)
+        }
+        val g = { x: Double ->
+            2 * x
+        }
+        val fog = f o g
+        // we know that fog(x) = 4 * x^2
+        assertEquals(fog(2.0), 16.0)
     }
 }
